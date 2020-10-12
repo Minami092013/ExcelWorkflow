@@ -1,4 +1,6 @@
 #!/Library/Frameworks/Python.framework/Versions/3.8/bin/python3
+#Check inventory status of parts in "Part List" and return \
+#quantities needed for the number of builds specified by user
 
 import openpyxl, collections
 
