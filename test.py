@@ -2,9 +2,9 @@
 #Check inventory status of parts in "Part List" and return \
 #quantities needed for the number of builds specified by user
 
-import openpyxl, collections
+import openpyxl, collections, os
 
-wb = openpyxl.load_workbook('/Users/Faye/Documents/coding_files/Inventory.xlsx')
+wb = openpyxl.load_workbook('inputs/Inventory.xlsx')
 stock = collections.defaultdict(int)
 sheet = wb.get_sheet_by_name('Sheet1')
 
@@ -12,7 +12,7 @@ for i in range(2, sheet.max_row + 1):
 	part = sheet.cell(row = i, column = 1).value
 	stock[part] += int(sheet.cell(row = i, column = 5).value)
 
-wb1 = openpyxl.load_workbook('/Users/Faye/Documents/coding_files/Part List.xlsx')
+wb1 = openpyxl.load_workbook('inputs/Part List.xlsx')
 sheet1 = wb1.get_sheet_by_name('Sheet1')
 
 number_of_builds = int(input("Enter Number of Builds Needed: "))
@@ -29,7 +29,10 @@ for i in range(2, sheet1.max_row + 1):
 	else:
 		sheet1.cell(row = i, column = 4).value = 0
 
-wb1.save('/Users/Faye/Documents/coding_files/Part List_updated.xlsx')
+if not os.path.exists('outputs'):
+    os.makedirs('outputs')
+
+wb1.save('outputs/Part List_updated.xlsx')
 
 
 
